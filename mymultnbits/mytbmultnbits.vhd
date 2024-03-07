@@ -12,14 +12,14 @@ end myMultNbitstestbench;
 architecture myMultNbitstestbench_Arch of myMultNbitstestbench is
 
 	-- Déclaration du composant à tester -> renvoie vers l'entité multNbits !
-	component multNbits is
+	component MultNbits is
     generic (
         N : integer 
     );
     port (
         e1 : in std_logic_vector (N-1 downto 0);
         e2 : in std_logic_vector (N-1 downto 0);
-        s1 : out std_logic_vector (N-1 downto 0)
+        s1 : out std_logic_vector (2*N-1 downto 0)
     );
     end component;
 
@@ -28,11 +28,11 @@ architecture myMultNbitstestbench_Arch of myMultNbitstestbench is
     
     -- Déclaration des signaux internes à l'architecture pour réslier les simulations
     signal e1_sim, e2_sim 	: std_logic_vector(N-1 downto 0) := (others => '0'); 
-    signal s1_sim 			: std_logic_vector(N-1 downto 0) := (others => '0'); 
+    signal s1_sim 			: std_logic_vector(2*N-1 downto 0) := (others => '0'); 
 
 begin
 
-    MyMultNbits : multNbits
+    MyMultNbits : MultNbits
     generic map (
         N => N
     )
