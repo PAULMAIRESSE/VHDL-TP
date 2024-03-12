@@ -95,6 +95,8 @@ begin
                     if (reset_sim = '1') then
                         s1_calc <= (others => '0');
                     elsif (preset_sim = '1') then
+                        s1_calc <= (others => '1');
+                    else 
                         s1_calc <= e1_sim;
                     end if;
                  	wait for 2*PERIOD;

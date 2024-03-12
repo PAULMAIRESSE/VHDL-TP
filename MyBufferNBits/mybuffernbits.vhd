@@ -31,6 +31,8 @@ begin
             s1 <= (others => '0');
         elsif (rising_edge(clock)) then
             if (preset = '1') then
+                s1 <= (others => '1');
+            else
                 s1 <= e1;
             end if;
         end if;
