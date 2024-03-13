@@ -55,19 +55,19 @@ begin
         s1 => s1_sim
     );
     
-	-- -- Définition du process permettant de générer l'horloge pour le test
-    -- My_clock_Proc : process -- pas de liste de sensibilité 	
-    -- begin
-    -- 	clock_sim <= '0';
-    --     wait for PERIOD/2;
-    --     clock_sim <= '1';
-    --     wait for PERIOD/2;
+	-- Définition du process permettant de générer l'horloge pour le test
+    My_clock_Proc : process -- pas de liste de sensibilité 	
+    begin
+    	clock_sim <= '0';
+        wait for PERIOD/2;
+        clock_sim <= '1';
+        wait for PERIOD/2;
         
-    --     if now = (4*N+2*(2**N))*PERIOD then
-    --     	wait;
-    --     end if;
+        if now = (4*N+2*(2**N))*PERIOD then
+        	wait;
+        end if;
     
-    -- end process;
+    end process;
     
 
 
