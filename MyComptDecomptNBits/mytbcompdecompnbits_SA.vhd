@@ -85,6 +85,7 @@ begin
                         r_SM_Test <= S2_INITDCPT;
                     else
                         r_SM_Test <= S1_CPT;
+                        report "s1 = " & integer'image(to_integer(unsigned(s1_sim))) & " at clock n°" & integer'image(now/PERIOD) severity note;
                     end if;
                 when S2_INITDCPT =>
                     r_SM_Test <= S3_DCPT;
@@ -93,6 +94,7 @@ begin
                         r_SM_Test <= S4_END;
                     else
                         r_SM_Test <= S3_DCPT;
+                        report "s1 = " & integer'image(to_integer(unsigned(s1_sim))) & " at clock n°" & integer'image(now/PERIOD) severity note;
                     end if;
                 when S4_END =>
                     r_SM_Test <= S4_END;
