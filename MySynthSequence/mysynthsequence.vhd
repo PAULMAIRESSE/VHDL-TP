@@ -64,32 +64,54 @@ architecture SynthSequence_DataFlow of SynthSequence is
     end component testAutomate;
 
     signal out_reset, out_cpt : std_logic;
-    signal cpt_s1 : std_logic_vector (2*N+1 downto 0);
+    signal cpt_s1 : std_logic_vector (2*N+2-1 downto 0);
     signal synth_s1 : std_logic_vector (2*N-1 downto 0);
+    signal synth_e1, synth_e2 : std_logic_vector (N-1 downto 0);
+    signal synth_sel, synth_c_in : std_logic;
 
 begin
     
-    MyTestAutomate: testAutomate port map (reset, clock, out_reset, out_cpt);
-
-    MyCptDeCpt: comptdecompNbits generic map (2*N+2) port map (out_reset, out_cpt, clock, cpt_s1);
-
-    MySynthComb: SynthComb 
-    generic map (2*N+2) 
+    MyTestAutomate: testAutomate 
     port map (
-        cpt_s1(0 to N-1),
-        cpt_s1(N to 2*N-1),
-        cpt_s1(2*N),
-        cpt_s1(2*N+1),
-        synth_s1
+        reset => reset, 
+        clock => clock, 
+        cpt => out_cpt, 
+        out_reset => out_reset
     );
 
-    MyBuffer: bufferNbits generic map (2*N) 
+    MyCptDeCpt: comptdecompNbits 
+    generic map (2*N+2)
     port map (
-        synth_s1,
-        reset,
-        '0',
-        clock,
-        s1
+        reset => out_reset, 
+        cpt => out_cpt, 
+        clock => clock, 
+        s1 => cpt_s1
+    );
+
+    -- s1 <= cpt_s1(2*N-1 downto 0);
+    synth_e1 <= cpt_s1(N-1 downto 0);
+    synth_e2 <= cpt_s1(2*N-1 downto N);
+    synth_sel <= cpt_s1(2*N);
+    synth_c_in <= cpt_s1(2*N+1);
+
+    MySynthComb: SynthComb 
+    generic map (N) 
+    port map (
+        e1 => synth_e1,
+        e2 => synth_e2,
+        sel => synth_sel,
+        c_in => synth_c_in,
+        s1 => synth_s1
+    );
+
+    MyBuffer: bufferNbits 
+    generic map (2*N) 
+    port map (
+        e1 => synth_s1,
+        reset => reset,
+        preset => '0',
+        clock => clock,
+        s1=>s1
     );
 
 end SynthSequence_DataFlow;
