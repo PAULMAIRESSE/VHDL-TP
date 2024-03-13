@@ -88,7 +88,6 @@ begin
         s1 => cpt_s1
     );
 
-    -- s1 <= cpt_s1(2*N-1 downto 0);
     synth_e1 <= cpt_s1(N-1 downto 0);
     synth_e2 <= cpt_s1(2*N-1 downto N);
     synth_sel <= cpt_s1(2*N);

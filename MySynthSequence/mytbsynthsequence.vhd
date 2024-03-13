@@ -52,7 +52,7 @@ begin
         clock <= not clock;
 
         -- On arrête la simulation
-        if now > 8*(2**N)*PERIODE then
+        if now > 2*4*4*(2**N)*PERIODE then
             wait;
         end if;
     end process;
@@ -72,7 +72,7 @@ begin
         wait for PERIODE;
         report "s1 = " & integer'image(to_integer(unsigned(s1_sim)));
 
-        if now > 8*(2**N)*PERIODE then
+        if now > 2*4*4*(2**N)*PERIODE then
             wait;
         end if;
     end process;
