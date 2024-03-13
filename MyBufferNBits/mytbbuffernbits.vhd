@@ -53,32 +53,31 @@ begin
         s1 => s1_sim
     );
     
-	-- Définition du process permettant de générer l'horloge pour le test
-    My_clock_Proc : process -- pas de liste de sensibilité 	
-    begin
-    	clock_sim <= '0';
-        wait for 0.8*PERIOD/2;
-        clock_sim <= '1';
-        wait for 0.2*PERIOD/2;
-        
-        if now = (8*(2**N))*PERIOD then
-        	wait;
-        end if;
-    
-    end process;
-
-    -- My_clock_Proc2 : process -- 20% duty cycle clock
+	-- -- Définition du process permettant de générer l'horloge pour le test
+    -- My_clock_Proc : process -- pas de liste de sensibilité 	
     -- begin
     -- 	clock_sim <= '0';
-    --     wait for 0.2*PERIOD/2;
+    --     wait for 0.5*PERIOD/2;
     --     clock_sim <= '1';
-    --     wait for 0.8*PERIOD/2;
+    --     wait for 0.5*PERIOD/2;
         
     --     if now = (8*(2**N))*PERIOD then
     --     	wait;
     --     end if;
     
     -- end process;
+
+    My_clock_Proc2 : process -- 20% duty cycle clock
+    begin
+    	clock_sim <= '0';
+        wait for 0.2*PERIOD/2;
+        clock_sim <= '1';
+        wait for 0.8*PERIOD/2;
+        
+        if now = (8*(2**N))*PERIOD then
+        	wait;
+        end if;
+    end process;
     
     -- Définition du process permettant de faire évoluer les signaux d'entrée du composant à tester	
     MyStimulus_Proc2 : process -- pas de liste de sensibilité 	
